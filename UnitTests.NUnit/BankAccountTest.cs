@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
 using UnitTests.Project.TestExercise;
 
 namespace UnitTests.NUnit
@@ -7,25 +8,38 @@ namespace UnitTests.NUnit
 
     public class BankAccountTest
     {
-        private BankAccount _bankAccount;
+        private BankAccount _account;
 
         [OneTimeSetUp]
 
         public void SetUp()
         {
 
-            _bankAccount = new BankAccount(new LoggerFake());
         }
 
         [Test]
         [TestCase(100)]
-        public void BankDeposit_Input100_ReturnTrue(int money)
+        public void BankDeposit_Input100LoggerFake_ReturnTrue(int money)
         {
-            var result = _bankAccount.BankDeposit(money);
+            BankAccount bankAccount = new BankAccount(new LoggerFake());
+            var result = bankAccount.BankDeposit(money);
 
             Assert.IsTrue(result);
-            Assert.That(_bankAccount.GetBalance, Is.EqualTo(money));
+            Assert.That(bankAccount.GetBalance, Is.EqualTo(money));
             
+        }
+
+        [Test]
+        [TestCase(100)]
+        public void BankDeposit_Input100Mocking_ReturnTrue(int money)
+        {
+            var mocking = new Mock<IGeneralLogger>();
+            BankAccount bankAccount = new BankAccount(mocking.Object);
+            var result = bankAccount.BankDeposit(money);
+
+            Assert.IsTrue(result);
+            Assert.That(bankAccount.GetBalance, Is.EqualTo(money));
+
         }
     }
 }
