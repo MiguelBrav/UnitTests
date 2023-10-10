@@ -21,15 +21,16 @@ namespace UnitTests.Project.TestExercise
             return true;
         }
 
-        public bool BankBithdrawal (int money)
+        public bool BankWithdrawal (int money)
         {
             if (money <= Balance)
             {
+                _loggerGeneral.LogDatabase("You are Withdrawal the amount of " + money.ToString());
                 Balance -= money;
-                return true;
+                return _loggerGeneral.LogBalanceAfterWithdraw(Balance);
             }
 
-            return false;
+            return _loggerGeneral.LogBalanceAfterWithdraw(Balance-money);
         }
 
         public int GetBalance()
