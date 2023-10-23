@@ -1,5 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
+using UnitTests.InitialProject.TestExercise;
 using UnitTests.Project.TestExercise;
 
 namespace UnitTests.NUnit
@@ -127,6 +128,93 @@ namespace UnitTests.NUnit
             {
                 Assert.IsTrue(result);
                 Assert.That(result, Is.TypeOf<bool>());
+            });
+        }
+
+        [Test]
+        public void BankAccountGeneralLogger_LogMockingObjectRef_ReturnTrue()
+        {
+            var loggerGeneralMocking = new Mock<IGeneralLogger>();
+
+            Client client = new Client();
+            Client clientNotUsed = new Client();
+
+            loggerGeneralMocking.Setup(u => u.MessageWithRefObjectReturnBool(ref client)).Returns(true);
+
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(loggerGeneralMocking.Object.MessageWithRefObjectReturnBool(ref client));
+                Assert.IsFalse(loggerGeneralMocking.Object.MessageWithRefObjectReturnBool(ref clientNotUsed));
+                Assert.That(loggerGeneralMocking.Object.MessageWithRefObjectReturnBool(ref client), Is.TypeOf<bool>());
+            });
+        }
+
+
+        [Test]
+        [TestCase("warning",1)]
+        [TestCase("success",2)]
+        public void BankAccountGeneralLogger_LogMockingSetupProperties_ReturnTrue(string typeLogger, int priorityType)
+        {
+            var loggerGeneralMocking = new Mock<IGeneralLogger>();
+
+            loggerGeneralMocking.Setup(u => u.TypeLogger).Returns(typeLogger);
+            loggerGeneralMocking.Setup(u => u.PriorityLogger).Returns(priorityType);
+
+            //This method is used to update property of an object moq
+            //loggerGeneralMocking.SetupAllProperties();
+            //loggerGeneralMocking.Object.PriorityLogger = 5;
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(loggerGeneralMocking.Object.TypeLogger, Is.EqualTo(typeLogger));
+                Assert.That(loggerGeneralMocking.Object.PriorityLogger, Is.EqualTo(priorityType));
+                Assert.That(loggerGeneralMocking.Object.TypeLogger, Is.TypeOf<string>());
+                Assert.That(loggerGeneralMocking.Object.PriorityLogger, Is.TypeOf<int>());
+            });
+
+            //Callbacks
+            
+            string tempTxt = "callbck";
+            string bdTxt = "key_database";
+            string expectedResult = string.Concat(tempTxt, bdTxt);
+
+            loggerGeneralMocking.Setup(u => u.LogDatabase(It.IsAny<string>())).Returns(true).Callback((string parameter) => tempTxt += parameter);
+
+            loggerGeneralMocking.Object.LogDatabase(bdTxt);
+
+            Assert.That(expectedResult, Is.EqualTo(tempTxt));
+        }
+
+        [Test]
+        [TestCase(20)]
+        [TestCase(100)]
+        public void BankAccountGeneralLogger_VerifyExample_ReturnTrue(int money)
+        {
+            var loggerGeneralMocking = new Mock<IGeneralLogger>();
+            string txtValidate = "Another text";
+
+            BankAccount bankAccount = new BankAccount(loggerGeneralMocking.Object);
+
+            bankAccount.BankDeposit(money);
+
+            //Validate if message method is executed 3 times with moq
+            //If Times executed is distinct to 3, the test fails
+
+            loggerGeneralMocking.Verify(u => u.Message(It.IsAny<string>()), Times.Exactly(3));
+
+            //Validate if message method is executed at least once with the parameter
+            loggerGeneralMocking.Verify(u => u.Message(txtValidate),Times.AtLeastOnce);
+
+            //Validate if property is setted one time with moq
+            loggerGeneralMocking.VerifySet(u => u.PriorityLogger = money, Times.Once);
+
+            //Validate if property is getted one time with moq
+            loggerGeneralMocking.VerifyGet(u => u.PriorityLogger, Times.AtLeastOnce);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(bankAccount.GetBalance, Is.TypeOf<int>());
+                Assert.That(bankAccount.GetBalance, Is.EqualTo(money));
             });
         }
     }

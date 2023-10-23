@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitTests.InitialProject.TestExercise;
 
 namespace UnitTests.Project.TestExercise
 {
     public class GeneralLogger : IGeneralLogger
     {
+        public int PriorityLogger { get; set; }
+        public string TypeLogger { get; set; }
+
         public bool LogBalanceAfterWithdraw(int balance)
         {
             if(balance >= 0)
@@ -41,6 +45,11 @@ namespace UnitTests.Project.TestExercise
             return true;
         }
 
+        public bool MessageWithRefObjectReturnBool(ref Client client)
+        {
+            return true;
+        }
+
         public string MessageWithReturnString(string message)
         {
             Console.WriteLine(message);
@@ -51,6 +60,9 @@ namespace UnitTests.Project.TestExercise
 
     public class LoggerFake : IGeneralLogger
     {
+        public int PriorityLogger { get; set; }
+        public string TypeLogger { get; set; }
+
         public bool LogBalanceAfterWithdraw(int balance)
         {
             return false;
@@ -69,6 +81,11 @@ namespace UnitTests.Project.TestExercise
         public bool MessageWithOutParameterReturnsBool(string str, out string outStr)
         {
             outStr = "";
+            return true;
+        }
+
+        public bool MessageWithRefObjectReturnBool(ref Client client)
+        {
             return true;
         }
 

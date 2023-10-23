@@ -17,6 +17,12 @@ namespace UnitTests.Project.TestExercise
         public bool BankDeposit (int money)
         {
             _loggerGeneral.Message("You are depositing the amount of " + money);
+            _loggerGeneral.Message("Another text");
+            _loggerGeneral.Message("Another example");
+            //set method
+            _loggerGeneral.PriorityLogger = money;
+            //get method
+            var priority = _loggerGeneral.PriorityLogger;
             Balance += money;
             return true;
         }
