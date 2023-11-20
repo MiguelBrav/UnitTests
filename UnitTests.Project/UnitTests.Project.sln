@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests.InitialProject", "UnitTests.InitialProject.csproj", "{BE7C0BC0-4893-4133-814F-0C9FCCC7AFAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests.InitialProject", "UnitTests.InitialProject.csproj", "{BE7C0BC0-4893-4133-814F-0C9FCCC7AFAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests.NUnit", "..\UnitTests.NUnit\UnitTests.NUnit.csproj", "{233FFB6A-8C30-4C4C-85E3-F42E4390F746}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests.NUnit", "..\UnitTests.NUnit\UnitTests.NUnit.csproj", "{233FFB6A-8C30-4C4C-85E3-F42E4390F746}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests.XUnit", "..\UnitTests.XUnit\UnitTests.XUnit.csproj", "{D3529136-FE20-44FC-9954-2C7B7DD45E22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{233FFB6A-8C30-4C4C-85E3-F42E4390F746}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{233FFB6A-8C30-4C4C-85E3-F42E4390F746}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{233FFB6A-8C30-4C4C-85E3-F42E4390F746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3529136-FE20-44FC-9954-2C7B7DD45E22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3529136-FE20-44FC-9954-2C7B7DD45E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3529136-FE20-44FC-9954-2C7B7DD45E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3529136-FE20-44FC-9954-2C7B7DD45E22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
