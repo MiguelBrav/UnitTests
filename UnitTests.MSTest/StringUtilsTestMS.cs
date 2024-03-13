@@ -51,13 +51,23 @@ namespace UnitTests.MSTest
         }
 
         [TestMethod]
-        [DataRow("Hello ","World")]
+        [DataRow("Hello ", "World")]
         [DataRow("I'm ", "Miguel")]
         public void ConcatenateStrings_WhenGivenMultipleStrings_ReturnsConcatenatedString(string val1, string val2)
         {
             string result = stringUtils.ConcatenateStrings(val1, val2);
 
-            Assert.AreEqual(string.Concat(val1,val2), result);
+            Assert.AreEqual(string.Concat(val1, val2), result);
+        }
+
+        [TestMethod]
+        [DataRow("radar")]
+        [DataRow("racecar")]
+        public void IsPalindrome_ValidPalindrome_ReturnsTrue(string palindrome)
+        {
+            bool result = stringUtils.IsPalindrome(palindrome);
+
+            Assert.IsTrue(result);
         }
 
     }

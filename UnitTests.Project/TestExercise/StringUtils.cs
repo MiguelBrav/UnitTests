@@ -38,6 +38,26 @@ namespace UnitTests.InitialProject.TestExercise
         {
             return string.Concat(strings);
         }
-        
+
+        public bool IsPalindrome(string word)
+        {
+            word = word.ToLower();
+
+            int startIndex = 0;
+            int endIndex = word.Length - 1;
+
+            while (startIndex < endIndex)
+            {
+                if (word[startIndex] != word[endIndex])
+                {
+                    return false;
+                }
+
+                startIndex++;
+                endIndex--;
+            }
+
+            return true;
+        }
     }
 }

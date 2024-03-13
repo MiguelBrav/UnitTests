@@ -60,5 +60,14 @@ namespace UnitTests.NUnit
 
             Assert.AreEqual(string.Concat(val1, val2), result);
         }
+
+        [TestCase("radar")]
+        [TestCase("racecar")]
+        public void IsPalindrome_ValidPalindrome_ReturnsTrue(string palindrome)
+        {
+            bool result = stringUtils.IsPalindrome(palindrome);
+
+            Assert.IsTrue(result);
+        }
     }
 }

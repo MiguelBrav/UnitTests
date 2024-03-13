@@ -57,5 +57,16 @@ namespace UnitTests.XUnit
 
             Assert.Equal(string.Concat(val1, val2), result);
         }
+
+        [Theory]
+        [InlineData("radar")]
+        [InlineData("racecar")]
+        public void IsPalindrome_ValidPalindrome_ReturnsTrue(string palindrome)
+        {
+
+            bool result = stringUtils.IsPalindrome(palindrome);
+
+            Assert.True(result);
+        }
     }
 }
