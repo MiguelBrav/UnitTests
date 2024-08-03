@@ -38,6 +38,16 @@ namespace UnitTests.InitialProject.TestExercise
         {
             return string.Concat(strings);
         }
-        
+
+        public bool AreEqualOrdinalIgnoreCase(string str1, string str2)
+        {
+            return string.Equals(str1, str2, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public bool AreEqualOrdinalCase(string str1, string str2)
+        {
+            return string.Equals(str1, str2, StringComparison.Ordinal);
+        }
+
     }
 }

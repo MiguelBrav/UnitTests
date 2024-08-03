@@ -60,5 +60,27 @@ namespace UnitTests.NUnit
 
             Assert.AreEqual(string.Concat(val1, val2), result);
         }
+
+        [Test]
+        [TestCase("Hello", "World", false)]
+        [TestCase("MIGUEL", "miguel", true)]
+        public void AreEqualOrdinalIgnoreCase_WhenGivenStrings_ReturnsCorrectResult(string str1, string str2, bool expected)
+        {
+            bool result = stringUtils.AreEqualOrdinalIgnoreCase(str1, str2);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOf<bool>(result);
+        }
+
+        [Test]
+        [TestCase("HELLO", "HELLO", true)]
+        [TestCase("MIGUEL", "miguel", false)]
+        public void AreEqualOrdinalCase_WhenGivenStrings_ReturnsCorrectResult(string str1, string str2, bool expected)
+        {
+            bool result = stringUtils.AreEqualOrdinalCase(str1, str2);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOf<bool>(result);
+        }
     }
 }

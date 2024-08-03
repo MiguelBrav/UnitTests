@@ -57,5 +57,28 @@ namespace UnitTests.XUnit
 
             Assert.Equal(string.Concat(val1, val2), result);
         }
+
+
+        [Theory]
+        [InlineData("Hello", "World", false)]
+        [InlineData("MIGUEL", "miguel", true)]
+        public void AreEqualOrdinalIgnoreCase_WhenGivenStrings_ReturnsCorrectResult(string str1, string str2, bool expected)
+        {
+            bool result = stringUtils.AreEqualOrdinalIgnoreCase(str1, str2);
+
+            Assert.Equal(expected, result);
+            Assert.IsType<bool>(result);
+        }
+
+        [Theory]
+        [InlineData("HELLO", "HELLO", true)]
+        [InlineData("MIGUEL", "miguel", false)]
+        public void AreEqualOrdinalCase_WhenGivenStrings_ReturnsCorrectResult(string str1, string str2, bool expected)
+        {
+            bool result = stringUtils.AreEqualOrdinalCase(str1, str2);
+
+            Assert.Equal(expected, result);
+            Assert.IsType<bool>(result);
+        }
     }
 }

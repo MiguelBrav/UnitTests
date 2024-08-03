@@ -60,5 +60,27 @@ namespace UnitTests.MSTest
             Assert.AreEqual(string.Concat(val1,val2), result);
         }
 
+        [TestMethod]
+        [DataRow("Hello ", "World",false)]
+        [DataRow("MIGUEL", "miguel",true)]
+        public void AreEqualOrdinalIgnoreCase_WhenGivenStrings_ReturnsCorrectResult(string str1, string str2, bool expected)
+        {
+            bool result = stringUtils.AreEqualOrdinalIgnoreCase(str1, str2);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOfType(result, typeof(bool));
+        }
+
+
+        [TestMethod]
+        [DataRow("HELLO", "HELLO", true)]
+        [DataRow("MIGUEL", "miguel", false)]
+        public void AreEqualOrdinalCase_WhenGivenStrings_ReturnsCorrectResult(string str1, string str2, bool expected)
+        {
+            bool result = stringUtils.AreEqualOrdinalCase(str1, str2);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOfType(result, typeof(bool));
+        }
     }
 }
