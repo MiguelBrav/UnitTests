@@ -39,6 +39,27 @@ namespace UnitTests.InitialProject.TestExercise
             return string.Concat(strings);
         }
 
+        public bool IsPalindrome(string word)
+        {
+            word = word.ToLower();
+
+            int startIndex = 0;
+            int endIndex = word.Length - 1;
+
+            while (startIndex < endIndex)
+            {
+                if (word[startIndex] != word[endIndex])
+                {
+                    return false;
+                }
+
+                startIndex++;
+                endIndex--;
+            }
+
+            return true;
+        }
+
         public bool AreEqualOrdinalIgnoreCase(string str1, string str2)
         {
             return string.Equals(str1, str2, StringComparison.OrdinalIgnoreCase);
