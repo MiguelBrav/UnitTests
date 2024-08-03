@@ -91,5 +91,16 @@ namespace UnitTests.XUnit
             Assert.Equal(expected, result);
             Assert.IsType<bool>(result);
         }
+
+        [Theory]
+        [InlineData("result", "R", "T", true)]
+        [InlineData("fails", "a", "x", false)]
+        public void CheckStartEnd_ShouldReturnExpectedResult_WhenStringIsValid(string str, string x, string y, bool expected)
+        {
+            bool result = stringUtils.checkStartEnd(str, x, y);
+
+            Assert.Equal(expected, result);
+            Assert.IsType<bool>(result);
+        }
     }
 }

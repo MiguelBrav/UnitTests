@@ -92,5 +92,16 @@ namespace UnitTests.MSTest
             Assert.AreEqual(expected, result);
             Assert.IsInstanceOfType(result, typeof(bool));
         }
+
+        [TestMethod]
+        [DataRow("result", "R","T", true)]
+        [DataRow("fails", "a", "x", false)]
+        public void CheckStartEnd_ShouldReturnTrue_WhenStringISValid(string str, string x, string y, bool expected)
+        {
+            bool result = stringUtils.checkStartEnd(str,x,y);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOfType(result, typeof(bool));
+        }
     }
 }

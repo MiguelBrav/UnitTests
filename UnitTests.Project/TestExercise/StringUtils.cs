@@ -70,5 +70,10 @@ namespace UnitTests.InitialProject.TestExercise
             return string.Equals(str1, str2, StringComparison.Ordinal);
         }
 
+        public bool checkStartEnd(string str,string x, string y)
+        {
+            return str.StartsWith(x, StringComparison.OrdinalIgnoreCase) &&
+                   str.EndsWith(y, StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

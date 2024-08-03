@@ -91,5 +91,16 @@ namespace UnitTests.NUnit
             Assert.AreEqual(expected, result);
             Assert.IsInstanceOf<bool>(result);
         }
+
+        [Test]
+        [TestCase("result", "R", "T", true)]
+        [TestCase("fails", "a", "x", false)]
+        public void CheckStartEnd_ShouldReturnExpectedResult_WhenStringIsValid(string str, string x, string y, bool expected)
+        {
+            bool result = stringUtils.checkStartEnd(str, x, y);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOf<bool>(result);
+        }
     }
 }
