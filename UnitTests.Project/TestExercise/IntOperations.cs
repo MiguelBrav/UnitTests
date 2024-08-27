@@ -43,6 +43,19 @@ namespace UnitTests.InitialProject.TestExercise
         public Dictionary<int, bool> CheckParity(List<int> numbers)
         {
             return numbers.ToDictionary(num => num, num => num % 2 == 0);
-        }  
+        }
+
+        public List<int> GenerateMultiplicationTable(int number)
+        {
+            List<int> table = new List<int>();
+
+            foreach (int i in Enumerable.Range(1, 10))
+            {
+                int result = number * i;
+                table.Add(result);
+            }
+
+            return table;
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace UnitTests.MSTest
             private IntOperations intOperations;
             private const int MaxRandomNumber = 100;
             private const int NumbersToGenerate = 10;
+            private const int ValueMultiplication = 7;
 
             [SetUp]
             public void Setup()
@@ -70,6 +71,18 @@ namespace UnitTests.MSTest
                     bool isEven = kvp.Value;
                     Assert.AreEqual(num % 2 == 0, isEven);
                 }
+            }
+
+            [Test]
+            public void GenerateMultiplicationTable_ReturnsCorrectResults()
+            {
+                var expectedResults = new List<int>();
+                for (int i = 1; i <= 10; i++)
+                {
+                    expectedResults.Add(ValueMultiplication * i);
+                }
+                var actualResults = intOperations.GenerateMultiplicationTable(ValueMultiplication);
+                Assert.AreEqual(expectedResults, actualResults);
             }
         }
     }

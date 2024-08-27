@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using UnitTests.InitialProject.TestExercise;
@@ -17,7 +18,7 @@ namespace UnitTests.XUnit
             private IntOperations intOperations;
             private const int MaxRandomNumber = 100;
             private const int NumbersToGenerate = 10;
-
+            private const int ValueMultiplication = 7;
             public IntOperationsTests()
             {
                 Random rand = new Random();
@@ -68,6 +69,18 @@ namespace UnitTests.XUnit
                     bool isEven = kvp.Value;
                     Assert.Equal(num % 2 == 0, isEven);
                 }
+            }
+
+            [Fact]
+            public void GenerateMultiplicationTable_ReturnsCorrectResults()
+            {
+                var expectedResults = new List<int>();
+                for (int i = 1; i <= 10; i++)
+                {
+                    expectedResults.Add(ValueMultiplication * i);
+                }
+                var actualResults = intOperations.GenerateMultiplicationTable(ValueMultiplication);
+                Assert.Equal(expectedResults, actualResults);
             }
         }
     }
