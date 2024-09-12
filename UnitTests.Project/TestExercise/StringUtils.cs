@@ -75,5 +75,18 @@ namespace UnitTests.InitialProject.TestExercise
             return str.StartsWith(x, StringComparison.OrdinalIgnoreCase) &&
                    str.EndsWith(y, StringComparison.OrdinalIgnoreCase);
         }
+
+        public int CountVowels(string text)
+        {
+            int count = 0;
+            foreach (char c in text)
+            {
+                if ("aeiou".IndexOf(c, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
     }
 }

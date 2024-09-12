@@ -103,5 +103,20 @@ namespace UnitTests.MSTest
             Assert.AreEqual(expected, result);
             Assert.IsInstanceOfType(result, typeof(bool));
         }
+
+        [TestMethod]
+        [DataRow("hello", 2)]
+        [DataRow("HELLO", 2)]
+        [DataRow("world", 1)]
+        [DataRow("aeiou", 5)]
+        [DataRow("", 0)]
+        public void CountVowels_ShouldReturnCorrectCount(string input, int expected)
+        {
+            int result = stringUtils.CountVowels(input);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOfType(result, typeof(int));
+        }
+
     }
 }

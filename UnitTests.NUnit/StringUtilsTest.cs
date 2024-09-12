@@ -102,5 +102,19 @@ namespace UnitTests.NUnit
             Assert.AreEqual(expected, result);
             Assert.IsInstanceOf<bool>(result);
         }
+
+        [Test]
+        [TestCase("hello", 2)]
+        [TestCase("HELLO", 2)]
+        [TestCase("world", 1)]
+        [TestCase("aeiou", 5)]
+        [TestCase("", 0)]
+        public void CountVowels_ShouldReturnCorrectCount(string input, int expected)
+        {
+            int result = stringUtils.CountVowels(input);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOf<int>(result);
+        }
     }
 }

@@ -102,5 +102,19 @@ namespace UnitTests.XUnit
             Assert.Equal(expected, result);
             Assert.IsType<bool>(result);
         }
+
+        [Theory]
+        [InlineData("hello", 2)]
+        [InlineData("HELLO", 2)]
+        [InlineData("world", 1)]
+        [InlineData("aeiou", 5)]
+        [InlineData("", 0)]
+        public void CountVowels_ShouldReturnCorrectCount(string input, int expected)
+        {
+            int result = stringUtils.CountVowels(input);
+
+            Assert.Equal(expected, result);
+            Assert.IsType<int>(result);
+        }
     }
 }
