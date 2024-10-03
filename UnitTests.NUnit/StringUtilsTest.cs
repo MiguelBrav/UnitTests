@@ -116,5 +116,18 @@ namespace UnitTests.NUnit
             Assert.AreEqual(expected, result);
             Assert.IsInstanceOf<int>(result);
         }
+
+        [TestCase("hello world", 2)]
+        [TestCase("hello", 1)]
+        [TestCase("   ", 0)]
+        [TestCase("word1\nword2\tword3", 3)]
+        [TestCase("", 0)]
+        public void CountWords_ShouldReturnCorrectCount(string input, int expected)
+        {
+            int result = stringUtils.CountWords(input);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOf<int>(result);
+        }
     }
 }

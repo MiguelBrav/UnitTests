@@ -118,5 +118,18 @@ namespace UnitTests.MSTest
             Assert.IsInstanceOfType(result, typeof(int));
         }
 
+        [TestMethod]
+        [DataRow("hello world", 2)]
+        [DataRow("hello", 1)]
+        [DataRow("   ", 0)]
+        [DataRow("word1\nword2\tword3", 3)]
+        [DataRow("", 0)]
+        public void CountWords_ShouldReturnCorrectCount(string input, int expected)
+        {
+            int result = stringUtils.CountWords(input);
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOfType(result, typeof(int));
+        }
+
     }
 }

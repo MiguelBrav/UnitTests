@@ -116,5 +116,19 @@ namespace UnitTests.XUnit
             Assert.Equal(expected, result);
             Assert.IsType<int>(result);
         }
+
+        [Theory]
+        [InlineData("hello world", 2)]
+        [InlineData("hello", 1)]
+        [InlineData("   ", 0)]
+        [InlineData("word1\nword2\tword3", 3)]
+        [InlineData("", 0)]
+        public void CountWords_ShouldReturnCorrectCount(string input, int expected)
+        {
+            int result = stringUtils.CountWords(input);
+
+            Assert.Equal(expected, result);
+            Assert.IsType<int>(result);
+        }
     }
 }

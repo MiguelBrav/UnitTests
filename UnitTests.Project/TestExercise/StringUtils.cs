@@ -88,5 +88,30 @@ namespace UnitTests.InitialProject.TestExercise
             }
             return count;
         }
+
+        public int CountWords(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+                return 0;
+
+            int wordCount = 0;
+            bool previousIsWhiteSpace = true;
+
+            foreach (char c in input)
+            {
+                if (char.IsWhiteSpace(c))
+                {
+                    previousIsWhiteSpace = true;
+                }
+                else if (previousIsWhiteSpace)
+                {
+                    wordCount++;
+                    previousIsWhiteSpace = false;
+                }
+            }
+
+            return wordCount;
+        }
+
     }
 }
