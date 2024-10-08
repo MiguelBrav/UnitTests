@@ -131,5 +131,19 @@ namespace UnitTests.MSTest
             Assert.IsInstanceOfType(result, typeof(int));
         }
 
+        [DataTestMethod]
+        [DataRow("hello", 'L', 2)]   
+        [DataRow("HELLO", 'l', 2)]   
+        [DataRow("hello", 'z', 0)]
+        [DataRow("Hello World", ' ', 1)]
+        [DataRow("", 'a', 0)]
+        public void CountCharacterOccurrences_ShouldReturnCorrectCount(string input, char character, int expected)
+        {
+            int result = stringUtils.CountCharacterOccurrences(input, character);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOfType(result, typeof(int));
+        }
+
     }
 }

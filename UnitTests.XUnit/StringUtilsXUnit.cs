@@ -130,5 +130,19 @@ namespace UnitTests.XUnit
             Assert.Equal(expected, result);
             Assert.IsType<int>(result);
         }
+
+        [Theory]
+        [InlineData("hello", 'L', 2)]  
+        [InlineData("HELLO", 'l', 2)]   
+        [InlineData("hello", 'z', 0)]
+        [InlineData("Hello World", ' ', 1)]
+        [InlineData("", 'a', 0)]
+        public void CountCharacterOccurrences_ShouldReturnCorrectCount(string input, char character, int expected)
+        {
+            int result = stringUtils.CountCharacterOccurrences(input, character);
+
+            Assert.Equal(expected, result);
+            Assert.IsType<int>(result);
+        }
     }
 }

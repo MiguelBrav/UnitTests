@@ -129,5 +129,18 @@ namespace UnitTests.NUnit
             Assert.AreEqual(expected, result);
             Assert.IsInstanceOf<int>(result);
         }
+
+        [TestCase("hello", 'L', 2)]   
+        [TestCase("HELLO", 'l', 2)]  
+        [TestCase("hello", 'z', 0)]
+        [TestCase("Hello World", ' ', 1)]
+        [TestCase("", 'a', 0)]
+        public void CountCharacterOccurrences_ShouldReturnCorrectCount(string input, char character, int expected)
+        {
+            int result = stringUtils.CountCharacterOccurrences(input, character);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOf<int>(result);
+        }
     }
 }
