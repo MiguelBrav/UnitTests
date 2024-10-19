@@ -20,8 +20,8 @@ public class FactoryHashTest
 
         // Assert
         Assert.IsNotNull(hash);
-        Assert.IsInstanceOf<string>(hash); // Equivalente a Assert.IsInstanceOfType en MSTest
-        Assert.IsNotEmpty(hash); // En NUnit, para verificar que un string no esté vacío
+        Assert.IsInstanceOf<string>(hash); 
+        Assert.IsNotEmpty(hash); 
     }
 
     [Test]
@@ -57,5 +57,58 @@ public class FactoryHashTest
         // Assert
         Assert.IsFalse(isValid);
         Assert.IsInstanceOf<bool>(isValid); 
+    }
+
+    [Test]
+    [TestCase("password123")]
+    [TestCase("mySecurePassword")]
+    [TestCase("testInput")]
+    public void HashAlgorithmFactory_ShouldReturnValidSHA256Hash(string input)
+    {
+        // Arrange
+        HashProduct hashAlgorithm = HashFactory.CreateHashAlgorithm("SHA256");
+
+        // Act
+        string hash = hashAlgorithm.Hash(input);
+
+        // Assert
+        Assert.IsNotNull(hash);
+        Assert.IsInstanceOf<string>(hash);
+        Assert.IsNotEmpty(hash);
+    }
+
+    [Test]
+    [TestCase("password123")]
+    [TestCase("mySecurePassword")]
+    [TestCase("testInput")]
+    public void HashAlgorithmFactory_Verify_ShouldReturnTrueForValidSHA256Hash(string input)
+    {
+        // Arrange
+        HashProduct hashAlgorithm = HashFactory.CreateHashAlgorithm("SHA256");
+
+        // Act
+        string hash = hashAlgorithm.Hash(input);
+        bool isValid = hashAlgorithm.Verify(input, hash);
+
+        // Assert
+        Assert.IsTrue(isValid);
+        Assert.IsInstanceOf<bool>(isValid);
+    }
+
+    [Test]
+    [TestCase("password123", "InvalidHashValue")]
+    [TestCase("mySecurePassword", "SomeOtherInvalidHash")]
+    [TestCase("testInput", "AnotherInvalidHashValue")]
+    public void HashAlgorithmFactory_Verify_ShouldReturnFalseForInvalidSHA256Hash(string input, string incorrectHash)
+    {
+        // Arrange
+        HashProduct hashAlgorithm = HashFactory.CreateHashAlgorithm("SHA256");
+
+        // Act
+        bool isValid = hashAlgorithm.Verify(input, incorrectHash);
+
+        // Assert
+        Assert.IsFalse(isValid);
+        Assert.IsInstanceOf<bool>(isValid);
     }
 }
