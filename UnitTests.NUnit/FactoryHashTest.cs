@@ -111,4 +111,57 @@ public class FactoryHashTest
         Assert.IsFalse(isValid);
         Assert.IsInstanceOf<bool>(isValid);
     }
+
+    [Test]
+    [TestCase("password123")]
+    [TestCase("mySecurePassword")]
+    [TestCase("testInput")]
+    public void HashAlgorithmFactory_ShouldReturnValidHMACSHA256Hash(string input)
+    {
+        // Arrange
+        HashProduct hashAlgorithm = HashFactory.CreateHashAlgorithm("HMACSHA256");
+
+        // Act
+        string hash = hashAlgorithm.Hash(input);
+
+        // Assert
+        Assert.IsNotNull(hash);
+        Assert.IsInstanceOf<string>(hash);
+        Assert.IsNotEmpty(hash);
+    }
+
+    [Test]
+    [TestCase("password123")]
+    [TestCase("mySecurePassword")]
+    [TestCase("testInput")]
+    public void HashAlgorithmFactory_Verify_ShouldReturnTrueForValidHMACSHA256Hash(string input)
+    {
+        // Arrange
+        HashProduct hashAlgorithm = HashFactory.CreateHashAlgorithm("HMACSHA256");
+
+        // Act
+        string hash = hashAlgorithm.Hash(input);
+        bool isValid = hashAlgorithm.Verify(input, hash);
+
+        // Assert
+        Assert.IsTrue(isValid);
+        Assert.IsInstanceOf<bool>(isValid);
+    }
+
+    [Test]
+    [TestCase("password123", "InvalidHashValue")]
+    [TestCase("mySecurePassword", "SomeOtherInvalidHash")]
+    [TestCase("testInput", "AnotherInvalidHashValue")]
+    public void HashAlgorithmFactory_Verify_ShouldReturnFalseForInvalidHMACSHA256Hash(string input, string incorrectHash)
+    {
+        // Arrange
+        HashProduct hashAlgorithm = HashFactory.CreateHashAlgorithm("HMACSHA256");
+
+        // Act
+        bool isValid = hashAlgorithm.Verify(input, incorrectHash);
+
+        // Assert
+        Assert.IsFalse(isValid);
+        Assert.IsInstanceOf<bool>(isValid);
+    }
 }
