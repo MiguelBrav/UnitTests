@@ -84,5 +84,19 @@ namespace UnitTests.MSTest
 
             CollectionAssert.AreEqual(expectedResults, actualResults);
         }
+
+
+        [TestMethod]
+        public void SumDigitsInNumber_ReturnsCorrectResult_PositiveNumber()
+        {
+            int number = 123456;
+            int expectedSum = 21; 
+
+            int actualSum = intOperations.SumDigitsInNumber(number);
+
+            Assert.AreEqual(expectedSum, actualSum);
+            Assert.IsInstanceOfType(actualSum, typeof(int));
+        }
+
     }
 }

@@ -82,6 +82,18 @@ namespace UnitTests.XUnit
                 var actualResults = intOperations.GenerateMultiplicationTable(ValueMultiplication);
                 Assert.Equal(expectedResults, actualResults);
             }
+
+            [Fact]
+            public void SumDigitsInNumber_ReturnsCorrectResult_PositiveNumber()
+            {
+                int number = 123456;
+                int expectedSum = 21;
+
+                int actualSum = intOperations.SumDigitsInNumber(number);
+
+                Assert.Equal(expectedSum, actualSum);
+                Assert.IsType<int>(actualSum);
+            }
         }
     }
 }

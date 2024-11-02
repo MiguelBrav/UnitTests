@@ -84,6 +84,18 @@ namespace UnitTests.MSTest
                 var actualResults = intOperations.GenerateMultiplicationTable(ValueMultiplication);
                 Assert.AreEqual(expectedResults, actualResults);
             }
+
+            [Test]
+            public void SumDigitsInNumber_ReturnsCorrectResult_PositiveNumber()
+            {
+                int number = 123456;
+                int expectedSum = 21;
+
+                int actualSum = intOperations.SumDigitsInNumber(number);
+
+                Assert.AreEqual(expectedSum, actualSum);
+                Assert.IsInstanceOf<int>(actualSum);
+            }
         }
     }
 }
