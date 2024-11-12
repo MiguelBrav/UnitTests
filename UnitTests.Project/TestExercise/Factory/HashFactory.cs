@@ -9,6 +9,7 @@ public class HashFactory
             "MD5" => new MD5Hash(),
             "SHA256" => new SHA256Hash(),
             "HMACSHA256" => new HMACSHA256Hash(),
+            "BCRYPT" => new BCryptHash(),
             _ => throw new ArgumentException("Not supported")
         };
     }
