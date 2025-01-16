@@ -98,5 +98,18 @@ namespace UnitTests.MSTest
             Assert.IsInstanceOfType(actualSum, typeof(int));
         }
 
+        [TestMethod]
+        public void GetDivisors_ReturnsCorrectDivisors_ForPositiveNumber()
+        {
+            int number = 36;
+            List<int> expectedDivisors = new List<int> { 1, 2, 3, 4, 6, 9, 12, 18, 36 };
+
+            List<int> actualDivisors = intOperations.GetDivisors(number);
+
+            CollectionAssert.AreEqual(expectedDivisors, actualDivisors);            
+            CollectionAssert.AllItemsAreInstancesOfType(actualDivisors,typeof(int));
+            Assert.IsTrue(actualDivisors.Count > 0);
+        }
+
     }
 }

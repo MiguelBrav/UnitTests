@@ -94,6 +94,19 @@ namespace UnitTests.XUnit
                 Assert.Equal(expectedSum, actualSum);
                 Assert.IsType<int>(actualSum);
             }
+
+            [Fact]
+            public void GetDivisors_ReturnsCorrectDivisors_ForPositiveNumber()
+            {
+                int number = 36;
+                List<int> expectedDivisors = new List<int> { 1, 2, 3, 4, 6, 9, 12, 18, 36 };
+
+                List<int> actualDivisors = intOperations.GetDivisors(number);
+
+                Assert.Equal(expectedDivisors, actualDivisors);
+                Assert.All(actualDivisors, item => Assert.IsType<int>(item));
+                Assert.NotEmpty(actualDivisors);
+            }
         }
     }
 }

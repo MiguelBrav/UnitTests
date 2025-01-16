@@ -68,5 +68,27 @@ namespace UnitTests.InitialProject.TestExercise
             }
             return sum;
         }
+
+        public List<int> GetDivisors(int number)
+        {
+            List<int> divisors = new List<int>();
+            int sqrt = (int)Math.Sqrt(number);
+
+            for (int i = 1; i <= sqrt; i++)
+            {
+                if (number % i == 0)
+                {
+                    divisors.Add(i);
+                    if (i != number / i) 
+                    {
+                        divisors.Add(number / i);
+                    }
+                }
+            }
+
+            divisors.Sort(); 
+            return divisors;
+        }
+
     }
 }

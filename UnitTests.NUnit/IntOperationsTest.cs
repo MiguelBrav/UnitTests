@@ -96,6 +96,19 @@ namespace UnitTests.MSTest
                 Assert.AreEqual(expectedSum, actualSum);
                 Assert.IsInstanceOf<int>(actualSum);
             }
+
+            [Test]
+            public void GetDivisors_ReturnsCorrectDivisors_ForPositiveNumber()
+            {
+                int number = 36;
+                List<int> expectedDivisors = new List<int> { 1, 2, 3, 4, 6, 9, 12, 18, 36 };
+
+                List<int> actualDivisors = intOperations.GetDivisors(number);
+
+                Assert.AreEqual(expectedDivisors, actualDivisors);
+                Assert.That(actualDivisors, Is.All.InstanceOf<int>());
+                Assert.That(actualDivisors, Is.Not.Empty);
+            }
         }
     }
 }
