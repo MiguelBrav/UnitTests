@@ -90,5 +90,19 @@ namespace UnitTests.InitialProject.TestExercise
             return divisors;
         }
 
+        public double ReverseNumber(double number)
+        {
+            bool isNegative = number < 0;  
+            number = Math.Abs(number);     
+
+            string[] parts = number.ToString().Split('.');
+            string integerPart = new string(parts[0].Reverse().ToArray());
+            string decimalPart = parts.Length > 1 ? new string(parts[1].Reverse().ToArray()) : string.Empty;
+
+            string reversed = decimalPart == string.Empty ? integerPart : $"{integerPart}.{decimalPart}";
+                        
+            double result = double.Parse(reversed);
+            return isNegative ? -result : result; 
+        }
     }
 }

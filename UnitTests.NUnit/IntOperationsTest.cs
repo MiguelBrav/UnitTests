@@ -109,6 +109,30 @@ namespace UnitTests.MSTest
                 Assert.That(actualDivisors, Is.All.InstanceOf<int>());
                 Assert.That(actualDivisors, Is.Not.Empty);
             }
+
+            [Test]
+            public void ReverseNumber_ReturnsCorrectResult_ForPositiveNumber()
+            {
+                double number = 123.45;
+                double expected = 321.54;
+                double result = intOperations.ReverseNumber(number);
+
+                Assert.IsInstanceOf<double>(result);
+                Assert.IsTrue(result > 0);
+                Assert.AreEqual(expected, result, 0.01);
+            }
+
+            [Test]
+            public void ReverseNumber_ReturnsCorrectResult_ForNegativeNumber()
+            {
+                double number = -123.45;
+                double expected = -321.54;
+                double result = intOperations.ReverseNumber(number);
+
+                Assert.IsInstanceOf<double>(result);
+                Assert.IsTrue(result < 0);
+                Assert.AreEqual(expected, result, 0.01);
+            }
         }
     }
 }

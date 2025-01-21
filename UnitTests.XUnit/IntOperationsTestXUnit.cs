@@ -107,6 +107,30 @@ namespace UnitTests.XUnit
                 Assert.All(actualDivisors, item => Assert.IsType<int>(item));
                 Assert.NotEmpty(actualDivisors);
             }
+
+            [Fact]
+            public void ReverseNumber_ReturnsCorrectResult_ForPositiveNumber()
+            {
+                double number = 123.45;
+                double expected = 321.54;
+                double result = intOperations.ReverseNumber(number);
+
+                Assert.IsType<double>(result);
+                Assert.True(result > 0);
+                Assert.Equal(expected, result, 2); 
+            }
+
+            [Fact]
+            public void ReverseNumber_ReturnsCorrectResult_ForNegativeNumber()
+            {
+                double number = -123.45;
+                double expected = -321.54;
+                double result = intOperations.ReverseNumber(number);
+
+                Assert.IsType<double>(result);
+                Assert.True(result < 0);
+                Assert.Equal(expected, result, 2); 
+            }
         }
     }
 }

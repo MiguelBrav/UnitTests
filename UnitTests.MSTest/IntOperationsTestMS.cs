@@ -111,5 +111,26 @@ namespace UnitTests.MSTest
             Assert.IsTrue(actualDivisors.Count > 0);
         }
 
+        [TestMethod]
+        public void ReverseNumber_ReturnsCorrectResult_ForPositiveNumber()
+        {
+            double number = 123.45;
+            double expected = 321.54;
+            double result = intOperations.ReverseNumber(number);
+            Assert.IsInstanceOfType(result, typeof(double));
+            Assert.IsTrue(result > 0);
+            Assert.AreEqual(expected, result, "The reversed number is not correct for a positive number.");
+        }
+
+        [TestMethod]
+        public void ReverseNumber_ReturnsCorrectResult_ForNegativeNumber()
+        {
+            double number = -123.45;
+            double expected = -321.54;
+            double result = intOperations.ReverseNumber(number);
+            Assert.IsInstanceOfType(result, typeof(double));
+            Assert.IsTrue(result < 0);
+            Assert.AreEqual(expected, result, "The reversed number is not correct for a negative number.");
+        }
     }
 }
