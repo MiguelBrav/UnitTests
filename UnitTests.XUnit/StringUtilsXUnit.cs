@@ -144,5 +144,16 @@ namespace UnitTests.XUnit
             Assert.Equal(expected, result);
             Assert.IsType<int>(result);
         }
+
+        [Theory]
+        [InlineData("Hello World", "World Hello")]
+        [InlineData("Good Morning", "Morning Good")]
+        public void ReverseWordsOrder_ShouldReturnReversedWordsCorrectly(string input, string expected)
+        {
+            string result = stringUtils.ReverseWords(input);
+
+            Assert.Equal(expected, result);
+            Assert.IsType<string>(result);
+        }
     }
 }

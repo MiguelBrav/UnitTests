@@ -124,4 +124,12 @@ public class StringUtils
         return count;
     }
 
+    public string ReverseWords(string str)
+    {
+        if (string.IsNullOrWhiteSpace(str))
+            return str;
+
+        return string.Join(" ", str.Split(' ').Reverse());
+    }
+
 }

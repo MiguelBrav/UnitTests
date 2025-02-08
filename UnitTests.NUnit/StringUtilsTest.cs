@@ -142,5 +142,15 @@ namespace UnitTests.NUnit
             Assert.AreEqual(expected, result);
             Assert.IsInstanceOf<int>(result);
         }
+
+        [TestCase("Hello World", "World Hello")]
+        [TestCase("Good Morning", "Morning Good")]
+        public void ReverseWordsOrder_ShouldReturnReversedWordsCorrectly(string input, string expected)
+        {
+            string result = stringUtils.ReverseWords(input);
+
+            Assert.AreEqual(expected, result);
+            Assert.That(result, Is.TypeOf<string>());
+        }
     }
 }

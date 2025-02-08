@@ -145,5 +145,16 @@ namespace UnitTests.MSTest
             Assert.IsInstanceOfType(result, typeof(int));
         }
 
+        [DataTestMethod]
+        [DataRow("Hello World", "World Hello")]
+        [DataRow("Good Morning", "Morning Good")]
+
+        public void ReverseWordsOrder_ShouldReturnReversedWordsCorrectly(string input, string expected)
+        {
+            string result = stringUtils.ReverseWords(input);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOfType(result, typeof(string));
+        }
     }
 }
