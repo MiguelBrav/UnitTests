@@ -152,5 +152,15 @@ namespace UnitTests.NUnit
             Assert.AreEqual(expected, result);
             Assert.That(result, Is.TypeOf<string>());
         }
+
+        [TestCase("hello", "HELLO")]
+        [TestCase("test CASE", "TEST case")]
+        public void AlternateCase_ShouldReturnCorrectlyFormattedString(string input, string expected)
+        {
+            string result = stringUtils.AlternateCase(input);
+
+            Assert.AreEqual(expected, result);
+            Assert.That(result, Is.TypeOf<string>());
+        }
     }
 }

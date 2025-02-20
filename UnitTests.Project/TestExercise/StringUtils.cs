@@ -132,4 +132,11 @@ public class StringUtils
         return string.Join(" ", str.Split(' ').Reverse());
     }
 
+    public string AlternateCase(string str)
+    {
+        if (string.IsNullOrEmpty(str))
+            return str;
+
+        return new string(str.Select(c => char.IsUpper(c) ? char.ToLower(c) : char.ToUpper(c)).ToArray());
+    }
 }

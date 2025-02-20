@@ -156,5 +156,16 @@ namespace UnitTests.MSTest
             Assert.AreEqual(expected, result);
             Assert.IsInstanceOfType(result, typeof(string));
         }
+
+        [DataTestMethod]
+        [DataRow("hello", "HELLO")]
+        [DataRow("test CASE", "TEST case")]
+        public void AlternateCase_ShouldReturnCorrectlyFormattedString(string input, string expected)
+        {
+            string result = stringUtils.AlternateCase(input);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOfType(result, typeof(string));
+        }
     }
 }

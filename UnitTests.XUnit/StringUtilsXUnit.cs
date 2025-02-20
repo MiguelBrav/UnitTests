@@ -155,5 +155,16 @@ namespace UnitTests.XUnit
             Assert.Equal(expected, result);
             Assert.IsType<string>(result);
         }
+
+        [Theory]
+        [InlineData("hello", "HELLO")]
+        [InlineData("test CASE", "TEST case")]
+        public void AlternateCase_ShouldReturnCorrectlyFormattedString(string input, string expected)
+        {
+            string result = stringUtils.AlternateCase(input);
+
+            Assert.Equal(expected, result);
+            Assert.IsType<string>(result);
+        }
     }
 }
