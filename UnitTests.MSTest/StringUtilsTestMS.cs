@@ -158,6 +158,17 @@ namespace UnitTests.MSTest
         }
 
         [DataTestMethod]
+        [DataRow("C# is awesome", "#C si emosewa")]
+        [DataRow("Unit Testing", "tinU gnitseT")]
+        public void ReverseEachWord_ShouldReturnReversedWordsCorrectly(string input, string expected)
+        {
+            string result = stringUtils.ReverseEachWord(input);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsInstanceOfType(result, typeof(string));
+        }
+
+        [DataTestMethod]
         [DataRow("hello", "HELLO")]
         [DataRow("test CASE", "TEST case")]
         public void AlternateCase_ShouldReturnCorrectlyFormattedString(string input, string expected)

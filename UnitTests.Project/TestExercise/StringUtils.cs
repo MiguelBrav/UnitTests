@@ -132,6 +132,14 @@ public class StringUtils
         return string.Join(" ", str.Split(' ').Reverse());
     }
 
+    public string ReverseEachWord(string str)
+    {
+        if (string.IsNullOrEmpty(str))
+            return str;
+
+        return string.Join(" ", str.Split(' ').Select(word => new string(word.Reverse().ToArray())));
+    }
+
     public string AlternateCase(string str)
     {
         if (string.IsNullOrEmpty(str))

@@ -153,6 +153,17 @@ namespace UnitTests.NUnit
             Assert.That(result, Is.TypeOf<string>());
         }
 
+        [Test]
+        [TestCase("C# is awesome", "#C si emosewa")]
+        [TestCase("Unit Testing", "tinU gnitseT")]
+        public void ReverseEachWord_ShouldReturnReversedWordsCorrectly(string input, string expected)
+        {
+            string result = stringUtils.ReverseEachWord(input);
+
+            Assert.AreEqual(expected, result);
+            Assert.That(result, Is.TypeOf<string>());
+        }
+
         [TestCase("hello", "HELLO")]
         [TestCase("test CASE", "TEST case")]
         public void AlternateCase_ShouldReturnCorrectlyFormattedString(string input, string expected)

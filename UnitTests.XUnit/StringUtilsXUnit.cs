@@ -157,6 +157,17 @@ namespace UnitTests.XUnit
         }
 
         [Theory]
+        [InlineData("C# is awesome", "#C si emosewa")]
+        [InlineData("Unit Testing", "tinU gnitseT")]
+        public void ReverseEachWord_ShouldReturnReversedWordsCorrectly(string input, string expected)
+        {
+            string result = stringUtils.ReverseEachWord(input);
+
+            Assert.Equal(expected, result);
+            Assert.IsType<string>(result);
+        }
+
+        [Theory]
         [InlineData("hello", "HELLO")]
         [InlineData("test CASE", "TEST case")]
         public void AlternateCase_ShouldReturnCorrectlyFormattedString(string input, string expected)
