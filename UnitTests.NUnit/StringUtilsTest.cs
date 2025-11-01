@@ -1,16 +1,11 @@
 ﻿using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnitTests.InitialProject.TestExercise;
 
 namespace UnitTests.NUnit
 {
     [TestFixture]
-
     public class StringUtilsTest
     {
         private StringUtils stringUtils;
@@ -26,9 +21,9 @@ namespace UnitTests.NUnit
         [TestCase("example")]
         public void ReverseString_WhenGivenString_ReturnsReversedString(string value)
         {
-            string result = stringUtils.ReverseString(value);
+            var result = stringUtils.ReverseString(value);
 
-            Assert.AreEqual(stringUtils.ReverseString(value), result);
+            Assert.That(result, Is.EqualTo(stringUtils.ReverseString(value)));
         }
 
         [Test]
@@ -36,9 +31,9 @@ namespace UnitTests.NUnit
         [TestCase("")]
         public void ToUpperCase_WhenGivenString_ReturnsUpperCaseString(string value)
         {
-            string result = stringUtils.ToUpperCase(value);
+            var result = stringUtils.ToUpperCase(value);
 
-            Assert.AreEqual(value.ToUpper(), result);
+            Assert.That(result, Is.EqualTo(value.ToUpper()));
         }
 
         [Test]
@@ -46,9 +41,9 @@ namespace UnitTests.NUnit
         [TestCase("")]
         public void ToLowerCase_WhenGivenString_ReturnsLowerCaseString(string value)
         {
-            string result = stringUtils.ToLowerCase(value);
+            var result = stringUtils.ToLowerCase(value);
 
-            Assert.AreEqual(value.ToLower(), result);
+            Assert.That(result, Is.EqualTo(value.ToLower()));
         }
 
         [Test]
@@ -56,18 +51,19 @@ namespace UnitTests.NUnit
         [TestCase("I'm ", "Miguel")]
         public void ConcatenateStrings_WhenGivenMultipleStrings_ReturnsConcatenatedString(string val1, string val2)
         {
-            string result = stringUtils.ConcatenateStrings(val1, val2);
+            var result = stringUtils.ConcatenateStrings(val1, val2);
 
-            Assert.AreEqual(string.Concat(val1, val2), result);
+            Assert.That(result, Is.EqualTo(val1 + val2));
         }
 
+        [Test]
         [TestCase("radar")]
         [TestCase("racecar")]
         public void IsPalindrome_ValidPalindrome_ReturnsTrue(string palindrome)
         {
-            bool result = stringUtils.IsPalindrome(palindrome);
+            var result = stringUtils.IsPalindrome(palindrome);
 
-            Assert.IsTrue(result);
+            Assert.That(result, Is.True);
         }
 
         [Test]
@@ -75,10 +71,10 @@ namespace UnitTests.NUnit
         [TestCase("MIGUEL", "miguel", true)]
         public void AreEqualOrdinalIgnoreCase_WhenGivenStrings_ReturnsCorrectResult(string str1, string str2, bool expected)
         {
-            bool result = stringUtils.AreEqualOrdinalIgnoreCase(str1, str2);
+            var result = stringUtils.AreEqualOrdinalIgnoreCase(str1, str2);
 
-            Assert.AreEqual(expected, result);
-            Assert.IsInstanceOf<bool>(result);
+            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.InstanceOf<bool>());
         }
 
         [Test]
@@ -86,10 +82,10 @@ namespace UnitTests.NUnit
         [TestCase("MIGUEL", "miguel", false)]
         public void AreEqualOrdinalCase_WhenGivenStrings_ReturnsCorrectResult(string str1, string str2, bool expected)
         {
-            bool result = stringUtils.AreEqualOrdinalCase(str1, str2);
+            var result = stringUtils.AreEqualOrdinalCase(str1, str2);
 
-            Assert.AreEqual(expected, result);
-            Assert.IsInstanceOf<bool>(result);
+            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.InstanceOf<bool>());
         }
 
         [Test]
@@ -97,10 +93,10 @@ namespace UnitTests.NUnit
         [TestCase("fails", "a", "x", false)]
         public void CheckStartEnd_ShouldReturnExpectedResult_WhenStringIsValid(string str, string x, string y, bool expected)
         {
-            bool result = stringUtils.checkStartEnd(str, x, y);
+            var result = stringUtils.checkStartEnd(str, x, y);
 
-            Assert.AreEqual(expected, result);
-            Assert.IsInstanceOf<bool>(result);
+            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.InstanceOf<bool>());
         }
 
         [Test]
@@ -111,12 +107,13 @@ namespace UnitTests.NUnit
         [TestCase("", 0)]
         public void CountVowels_ShouldReturnCorrectCount(string input, int expected)
         {
-            int result = stringUtils.CountVowels(input);
+            var result = stringUtils.CountVowels(input);
 
-            Assert.AreEqual(expected, result);
-            Assert.IsInstanceOf<int>(result);
+            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.InstanceOf<int>());
         }
 
+        [Test]
         [TestCase("hello world", 2)]
         [TestCase("hello", 1)]
         [TestCase("   ", 0)]
@@ -124,32 +121,34 @@ namespace UnitTests.NUnit
         [TestCase("", 0)]
         public void CountWords_ShouldReturnCorrectCount(string input, int expected)
         {
-            int result = stringUtils.CountWords(input);
+            var result = stringUtils.CountWords(input);
 
-            Assert.AreEqual(expected, result);
-            Assert.IsInstanceOf<int>(result);
+            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.InstanceOf<int>());
         }
 
-        [TestCase("hello", 'L', 2)]   
-        [TestCase("HELLO", 'l', 2)]  
+        [Test]
+        [TestCase("hello", 'L', 2)]
+        [TestCase("HELLO", 'l', 2)]
         [TestCase("hello", 'z', 0)]
         [TestCase("Hello World", ' ', 1)]
         [TestCase("", 'a', 0)]
         public void CountCharacterOccurrences_ShouldReturnCorrectCount(string input, char character, int expected)
         {
-            int result = stringUtils.CountCharacterOccurrences(input, character);
+            var result = stringUtils.CountCharacterOccurrences(input, character);
 
-            Assert.AreEqual(expected, result);
-            Assert.IsInstanceOf<int>(result);
+            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.InstanceOf<int>());
         }
 
+        [Test]
         [TestCase("Hello World", "World Hello")]
         [TestCase("Good Morning", "Morning Good")]
         public void ReverseWordsOrder_ShouldReturnReversedWordsCorrectly(string input, string expected)
         {
-            string result = stringUtils.ReverseWords(input);
+            var result = stringUtils.ReverseWords(input);
 
-            Assert.AreEqual(expected, result);
+            Assert.That(result, Is.EqualTo(expected));
             Assert.That(result, Is.TypeOf<string>());
         }
 
@@ -158,19 +157,20 @@ namespace UnitTests.NUnit
         [TestCase("Unit Testing", "tinU gnitseT")]
         public void ReverseEachWord_ShouldReturnReversedWordsCorrectly(string input, string expected)
         {
-            string result = stringUtils.ReverseEachWord(input);
+            var result = stringUtils.ReverseEachWord(input);
 
-            Assert.AreEqual(expected, result);
+            Assert.That(result, Is.EqualTo(expected));
             Assert.That(result, Is.TypeOf<string>());
         }
 
+        [Test]
         [TestCase("hello", "HELLO")]
         [TestCase("test CASE", "TEST case")]
         public void AlternateCase_ShouldReturnCorrectlyFormattedString(string input, string expected)
         {
-            string result = stringUtils.AlternateCase(input);
+            var result = stringUtils.AlternateCase(input);
 
-            Assert.AreEqual(expected, result);
+            Assert.That(result, Is.EqualTo(expected));
             Assert.That(result, Is.TypeOf<string>());
         }
     }

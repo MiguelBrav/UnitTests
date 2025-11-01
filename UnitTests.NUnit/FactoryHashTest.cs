@@ -3,7 +3,7 @@ using UnitTests.InitialProject.TestExercise.Factory;
 
 namespace UnitTests.NUnit;
 
-[TestFixture] 
+[TestFixture]
 public class FactoryHashTest
 {
     [Test]
@@ -19,9 +19,9 @@ public class FactoryHashTest
         string hash = hashAlgorithm.Hash(input);
 
         // Assert
-        Assert.IsNotNull(hash);
-        Assert.IsInstanceOf<string>(hash); 
-        Assert.IsNotEmpty(hash); 
+        Assert.That(hash, Is.Not.Null);
+        Assert.That(hash, Is.InstanceOf<string>());
+        Assert.That(hash, Is.Not.Empty);
     }
 
     [Test]
@@ -38,8 +38,8 @@ public class FactoryHashTest
         bool isValid = hashAlgorithm.Verify(input, hash);
 
         // Assert
-        Assert.IsTrue(isValid);
-        Assert.IsInstanceOf<bool>(isValid);
+        Assert.That(isValid, Is.True);
+        Assert.That(isValid, Is.InstanceOf<bool>());
     }
 
     [Test]
@@ -55,8 +55,8 @@ public class FactoryHashTest
         bool isValid = hashAlgorithm.Verify(input, incorrectHash);
 
         // Assert
-        Assert.IsFalse(isValid);
-        Assert.IsInstanceOf<bool>(isValid); 
+        Assert.That(isValid, Is.False);
+        Assert.That(isValid, Is.InstanceOf<bool>());
     }
 
     [Test]
@@ -72,9 +72,9 @@ public class FactoryHashTest
         string hash = hashAlgorithm.Hash(input);
 
         // Assert
-        Assert.IsNotNull(hash);
-        Assert.IsInstanceOf<string>(hash);
-        Assert.IsNotEmpty(hash);
+        Assert.That(hash, Is.Not.Null);
+        Assert.That(hash, Is.InstanceOf<string>());
+        Assert.That(hash, Is.Not.Empty);
     }
 
     [Test]
@@ -91,8 +91,8 @@ public class FactoryHashTest
         bool isValid = hashAlgorithm.Verify(input, hash);
 
         // Assert
-        Assert.IsTrue(isValid);
-        Assert.IsInstanceOf<bool>(isValid);
+        Assert.That(isValid, Is.True);
+        Assert.That(isValid, Is.InstanceOf<bool>());
     }
 
     [Test]
@@ -108,8 +108,8 @@ public class FactoryHashTest
         bool isValid = hashAlgorithm.Verify(input, incorrectHash);
 
         // Assert
-        Assert.IsFalse(isValid);
-        Assert.IsInstanceOf<bool>(isValid);
+        Assert.That(isValid, Is.False);
+        Assert.That(isValid, Is.InstanceOf<bool>());
     }
 
     [Test]
@@ -125,9 +125,9 @@ public class FactoryHashTest
         string hash = hashAlgorithm.Hash(input);
 
         // Assert
-        Assert.IsNotNull(hash);
-        Assert.IsInstanceOf<string>(hash);
-        Assert.IsNotEmpty(hash);
+        Assert.That(hash, Is.Not.Null);
+        Assert.That(hash, Is.InstanceOf<string>());
+        Assert.That(hash, Is.Not.Empty);
     }
 
     [Test]
@@ -144,8 +144,8 @@ public class FactoryHashTest
         bool isValid = hashAlgorithm.Verify(input, hash);
 
         // Assert
-        Assert.IsTrue(isValid);
-        Assert.IsInstanceOf<bool>(isValid);
+        Assert.That(isValid, Is.True);
+        Assert.That(isValid, Is.InstanceOf<bool>());
     }
 
     [Test]
@@ -161,8 +161,8 @@ public class FactoryHashTest
         bool isValid = hashAlgorithm.Verify(input, incorrectHash);
 
         // Assert
-        Assert.IsFalse(isValid);
-        Assert.IsInstanceOf<bool>(isValid);
+        Assert.That(isValid, Is.False);
+        Assert.That(isValid, Is.InstanceOf<bool>());
     }
 
     [Test]
@@ -178,9 +178,9 @@ public class FactoryHashTest
         string hash = hashAlgorithm.Hash(input);
 
         // Assert
-        Assert.IsNotNull(hash);
-        Assert.IsInstanceOf<string>(hash);
-        Assert.IsTrue(hash.Length > 0);
+        Assert.That(hash, Is.Not.Null);
+        Assert.That(hash, Is.InstanceOf<string>());
+        Assert.That(hash.Length > 0, Is.True);
     }
 
     [Test]
@@ -197,8 +197,8 @@ public class FactoryHashTest
         bool isValid = hashAlgorithm.Verify(input, hash);
 
         // Assert
-        Assert.IsTrue(isValid);
-        Assert.IsInstanceOf<bool>(isValid);
+        Assert.That(isValid, Is.True);
+        Assert.That(isValid, Is.InstanceOf<bool>());
     }
 
     [Test]
@@ -214,7 +214,7 @@ public class FactoryHashTest
         bool isValid = hashAlgorithm.Verify(input, incorrectHash);
 
         // Assert
-        Assert.IsFalse(isValid);
-        Assert.IsInstanceOf<bool>(isValid);
+        Assert.That(isValid, Is.False);
+        Assert.That(isValid, Is.InstanceOf<bool>());
     }
 }
