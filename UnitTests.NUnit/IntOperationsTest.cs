@@ -2,137 +2,129 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnitTests.InitialProject.TestExercise;
 
-namespace UnitTests.MSTest
+namespace UnitTests.NUnit
 {
-
-    public class IntOperationsTest
+    [TestFixture]
+    public class IntOperationsTests
     {
-        [TestFixture]
-        public class IntOperationsTests
+        private List<int> randomNumbers;
+        private IntOperations intOperations;
+        private const int MaxRandomNumber = 100;
+        private const int NumbersToGenerate = 10;
+        private const int ValueMultiplication = 7;
+
+        [SetUp]
+        public void Setup()
         {
-            private List<int> randomNumbers;
-            private IntOperations intOperations;
-            private const int MaxRandomNumber = 100;
-            private const int NumbersToGenerate = 10;
-            private const int ValueMultiplication = 7;
+            Random rand = new Random();
+            randomNumbers = new List<int>();
 
-            [SetUp]
-            public void Setup()
+            while (randomNumbers.Count < NumbersToGenerate)
             {
-                Random rand = new Random();
-                randomNumbers = new List<int>();
-                while (randomNumbers.Count < NumbersToGenerate)
+                int randomNumber = rand.Next(1, MaxRandomNumber + 1);
+                if (!randomNumbers.Contains(randomNumber))
                 {
-                    int randomNumber = rand.Next(1, MaxRandomNumber + 1);
-                    if (!randomNumbers.Contains(randomNumber))
-                    {
-                        randomNumbers.Add(randomNumber);
-                    }
-                }
-                intOperations = new IntOperations();
-            }
-
-            [Test]
-            public void TestFindPrimeNumbers_ReturnsPrimeNumbers()
-            {
-                List<int> primeNumbers = intOperations.FindPrimeNumbers(randomNumbers);
-                foreach (int prime in primeNumbers)
-                {
-                    Assert.IsTrue(intOperations.IsPrime(prime));
+                    randomNumbers.Add(randomNumber);
                 }
             }
 
-            [Test]
-            public void TestCalculateFactorial_CalculatesFactorialCorrectly()
+            intOperations = new IntOperations();
+        }
+
+        [Test]
+        public void TestFindPrimeNumbers_ReturnsPrimeNumbers()
+        {
+            var primeNumbers = intOperations.FindPrimeNumbers(randomNumbers);
+
+            Assert.That(primeNumbers, Is.All.Matches<int>(p => intOperations.IsPrime(p)));
+        }
+
+        [Test]
+        public void TestCalculateFactorial_CalculatesFactorialCorrectly()
+        {
+            foreach (int num in randomNumbers)
             {
-                foreach (int num in randomNumbers)
-                {
-                    long expectedFactorial = 1;
-                    for (int i = 1; i <= num; i++)
-                    {
-                        expectedFactorial *= i;
-                    }
-                    long calculatedFactorial = intOperations.CalculateFactorial(num);
-                    Assert.AreEqual(expectedFactorial, calculatedFactorial);
-                }
+                long expectedFactorial = 1;
+                for (int i = 1; i <= num; i++)
+                    expectedFactorial *= i;
+
+                long actual = intOperations.CalculateFactorial(num);
+                Assert.That(actual, Is.EqualTo(expectedFactorial));
             }
+        }
 
-            [Test]
-            public void TestCheckParity_ChecksParityCorrectly()
-            {
-                Dictionary<int, bool> parityResult = intOperations.CheckParity(randomNumbers);
-                foreach (var kvp in parityResult)
-                {
-                    int num = kvp.Key;
-                    bool isEven = kvp.Value;
-                    Assert.AreEqual(num % 2 == 0, isEven);
-                }
-            }
+        [Test]
+        public void TestCheckParity_ChecksParityCorrectly()
+        {
+            var result = intOperations.CheckParity(randomNumbers);
 
-            [Test]
-            public void GenerateMultiplicationTable_ReturnsCorrectResults()
-            {
-                var expectedResults = new List<int>();
-                for (int i = 1; i <= 10; i++)
-                {
-                    expectedResults.Add(ValueMultiplication * i);
-                }
-                var actualResults = intOperations.GenerateMultiplicationTable(ValueMultiplication);
-                Assert.AreEqual(expectedResults, actualResults);
-            }
+            foreach (var kvp in result)
+                Assert.That(kvp.Value, Is.EqualTo(kvp.Key % 2 == 0));
+        }
 
-            [Test]
-            public void SumDigitsInNumber_ReturnsCorrectResult_PositiveNumber()
-            {
-                int number = 123456;
-                int expectedSum = 21;
+        [Test]
+        public void GenerateMultiplicationTable_ReturnsCorrectResults()
+        {
+            var expected = Enumerable.Range(1, 10)
+                                     .Select(x => x * ValueMultiplication)
+                                     .ToList();
 
-                int actualSum = intOperations.SumDigitsInNumber(number);
+            var actual = intOperations.GenerateMultiplicationTable(ValueMultiplication);
 
-                Assert.AreEqual(expectedSum, actualSum);
-                Assert.IsInstanceOf<int>(actualSum);
-            }
+            Assert.That(actual, Is.EqualTo(expected));
+        }
 
-            [Test]
-            public void GetDivisors_ReturnsCorrectDivisors_ForPositiveNumber()
-            {
-                int number = 36;
-                List<int> expectedDivisors = new List<int> { 1, 2, 3, 4, 6, 9, 12, 18, 36 };
+        [Test]
+        public void SumDigitsInNumber_ReturnsCorrectResult_PositiveNumber()
+        {
+            int number = 123456;
+            int expected = 21;
 
-                List<int> actualDivisors = intOperations.GetDivisors(number);
+            int result = intOperations.SumDigitsInNumber(number);
 
-                Assert.AreEqual(expectedDivisors, actualDivisors);
-                Assert.That(actualDivisors, Is.All.InstanceOf<int>());
-                Assert.That(actualDivisors, Is.Not.Empty);
-            }
+            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.TypeOf<int>());
+        }
 
-            [Test]
-            public void ReverseNumber_ReturnsCorrectResult_ForPositiveNumber()
-            {
-                double number = 123.45;
-                double expected = 321.54;
-                double result = intOperations.ReverseNumber(number);
+        [Test]
+        public void GetDivisors_ReturnsCorrectDivisors_ForPositiveNumber()
+        {
+            int number = 36;
+            var expected = new List<int> { 1, 2, 3, 4, 6, 9, 12, 18, 36 };
 
-                Assert.IsInstanceOf<double>(result);
-                Assert.IsTrue(result > 0);
-                Assert.AreEqual(expected, result, 0.01);
-            }
+            var actual = intOperations.GetDivisors(number);
 
-            [Test]
-            public void ReverseNumber_ReturnsCorrectResult_ForNegativeNumber()
-            {
-                double number = -123.45;
-                double expected = -321.54;
-                double result = intOperations.ReverseNumber(number);
+            Assert.That(actual, Is.EqualTo(expected));
+            Assert.That(actual, Is.Not.Empty);
+            Assert.That(actual, Is.All.InstanceOf<int>());
+        }
 
-                Assert.IsInstanceOf<double>(result);
-                Assert.IsTrue(result < 0);
-                Assert.AreEqual(expected, result, 0.01);
-            }
+        [Test]
+        public void ReverseNumber_ReturnsCorrectResult_ForPositiveNumber()
+        {
+            double number = 123.45;
+            double expected = 321.54;
+
+            double result = intOperations.ReverseNumber(number);
+
+            Assert.That(result, Is.TypeOf<double>());
+            Assert.That(result, Is.GreaterThan(0));
+            Assert.That(result, Is.EqualTo(expected).Within(0.01));
+        }
+
+        [Test]
+        public void ReverseNumber_ReturnsCorrectResult_ForNegativeNumber()
+        {
+            double number = -123.45;
+            double expected = -321.54;
+
+            double result = intOperations.ReverseNumber(number);
+
+            Assert.That(result, Is.TypeOf<double>());
+            Assert.That(result, Is.LessThan(0));
+            Assert.That(result, Is.EqualTo(expected).Within(0.01));
         }
     }
 }

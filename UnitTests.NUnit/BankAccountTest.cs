@@ -25,7 +25,7 @@ namespace UnitTests.NUnit
             BankAccount bankAccount = new BankAccount(new LoggerFake());
             var result = bankAccount.BankDeposit(money);
 
-            Assert.IsTrue(result);
+            Assert.That(result, Is.True);
             Assert.That(bankAccount.GetBalance, Is.EqualTo(money));
             
         }
@@ -38,7 +38,7 @@ namespace UnitTests.NUnit
             BankAccount bankAccount = new BankAccount(mocking.Object);
             var result = bankAccount.BankDeposit(money);
 
-            Assert.IsTrue(result);
+            Assert.That(result, Is.True);
             Assert.That(bankAccount.GetBalance(), Is.EqualTo(money));
             Assert.That(result, Is.TypeOf<bool>());
 
@@ -58,9 +58,9 @@ namespace UnitTests.NUnit
             
             bankAccount.BankDeposit(money);
 
-            var result = bankAccount.BankWithdrawal(withdraw); 
+            var result = bankAccount.BankWithdrawal(withdraw);
 
-            Assert.IsTrue(result);
+            Assert.That(result, Is.True);
             Assert.That(bankAccount.GetBalance(), Is.EqualTo(money- withdraw));
             Assert.That(result, Is.TypeOf<bool>());
 
@@ -87,7 +87,7 @@ namespace UnitTests.NUnit
 
             var result = bankAccount.BankWithdrawal(withdraw);
 
-            Assert.IsFalse(result);
+            Assert.That(result, Is.False);
             Assert.That(result, Is.TypeOf<bool>());
         }
 
@@ -126,7 +126,7 @@ namespace UnitTests.NUnit
             //Example with assert multiple, to handle errors
             Assert.Multiple(() =>
             {
-                Assert.IsTrue(result);
+                Assert.That(result, Is.True);
                 Assert.That(result, Is.TypeOf<bool>());
             });
         }
@@ -143,8 +143,8 @@ namespace UnitTests.NUnit
 
             Assert.Multiple(() =>
             {
-                Assert.IsTrue(loggerGeneralMocking.Object.MessageWithRefObjectReturnBool(ref client));
-                Assert.IsFalse(loggerGeneralMocking.Object.MessageWithRefObjectReturnBool(ref clientNotUsed));
+                Assert.That(loggerGeneralMocking.Object.MessageWithRefObjectReturnBool(ref client), Is.True);
+                Assert.That(loggerGeneralMocking.Object.MessageWithRefObjectReturnBool(ref clientNotUsed), Is.False);
                 Assert.That(loggerGeneralMocking.Object.MessageWithRefObjectReturnBool(ref client), Is.TypeOf<bool>());
             });
         }
